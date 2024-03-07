@@ -9,7 +9,7 @@
                             <div class="col-sm-6">
                                 <div class="text-sm-end d-none d-sm-block"> 
                                 <i class="mdi mdi-heart text-danger"></i>
-                                 Student Management
+                                  Admin
                                    
                                 </div>
                             </div>
@@ -76,23 +76,23 @@
         <div class="rightbar-overlay"></div>
         <script src="assets/js/app.js"></script>
         <!-- JAVASCRIPT -->
-        <script src="assets/libs/jquery/jquery.min.js"></script>
-        <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
-        <script src="assets/libs/simplebar/simplebar.min.js"></script>
-        <script src="assets/libs/node-waves/waves.min.js"></script>
+        <script src="{{ URL::asset('assets/libs/jquery/jquery.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/libs/node-waves/waves.min.js') }}"></script>
 
         <!-- Icon -->
         <script src="https://unicons.iconscout.com/release/v2.0.1/script/monochrome/bundle.js"></script>
-
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
         <!-- apexcharts -->
-        <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+        <script src="{{ URL::asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
 
         <!-- Vector map-->
-        <script src="assets/libs/jsvectormap/js/jsvectormap.min.js"></script>
-        <script src="assets/libs/jsvectormap/maps/world-merc.js"></script>
+        <script src="{{ URL::asset('assets/libs/jsvectormap/js/jsvectormap.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/libs/jsvectormap/maps/world-merc.js') }}"></script>
 
-        <script src="assets/js/pages/dashboard.init.js"></script>
+        <script src="{{ URL::asset('assets/js/pages/dashboard.init.js') }}"></script>
 
         <!-- App js -->
         

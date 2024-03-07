@@ -28,7 +28,7 @@
 
 
                                           <span style="float: right; cursor:pointer;">
-                                          <a href="{{ url('/pendriveadd') }}" class="btn btn-primary"><i class="mdi mdi-plus me-1"></i>Add Pendrive</a>
+                                          <a href="{{ url('/create-pendrive') }}" class="btn btn-primary"><i class="mdi mdi-plus me-1"></i>Add Pendrive</a>
                                           </span>
 
 
@@ -58,26 +58,54 @@
                                               <th>Version Android</th>
                                               <th>Created At</th>
                                               <th>Updated At</th>
-                                              <th>Edit</th>
-                                              <th>Delete</th>
+                                              <th colspan="2">Action</th>
                                           </tr>
                                       </thead>
                                       <tbody>
                                       <tbody>
-                                        @php $i = 1 @endphp
+                                        @php $i=1; @endphp
                                         @foreach ($pendrives as $pendrive)
-                                        <tr>
-                                            <td>{{ $i++ }}</td>
-                                            <td>{{ $pendrive->pendrive }}</td>
-                                            <td>{{ $pendrive->activation }}</td>
-                                            <td>{{ $pendrive->validity }}</td>
-                                            <td>{{ $pendrive->remaining }}</td>
-                                            <td>{{ $pendrive->validityapp }}</td>
-                                            <td>{{ $pendrive->defaultpass }}</td>
-                                            <td>{{ $pendrive->installpname }}</td>
-                                        </tr>
-                                        
-                                    @endforeach
+                                        @php
+                                            $project_id = $pendrive->project_id;
+                                            $school_id = $pendrive->school_id;
+                                            $project = DB::table('project')->where('id',$project_id)->first();
+                                            $school = DB::table('school')->where('id',$school_id)->first();
+                                            if ($project) {
+                                                $project_name = $project->name;
+                                            } 
+                                            if ($school){
+                                                $school_name = $school->name;
+                                            }
+
+                                        @endphp
+                                            <tr>
+                                                <td>{{ $i++ }}</td>
+                                                <td>{{ $pendrive->pendrive }}</td>
+                                                <td>{{ $school_name }}</td>
+                                                <td>{{ $project_name }}</td>
+                                                <td>{{ $pendrive->activation_code }}</td>
+                                                <td>{{ $pendrive->validity_time }}</td>
+                                                <td>{{ $pendrive->remainingdays }}</td>
+                                                <td>{{ $pendrive->app_validity }}</td>
+                                                <td>{{ $pendrive->default_pass }}</td>
+                                                <td>{{ $pendrive->instatllation_person_name }}</td>
+                                                <td>{{ $pendrive->support_call }}</td>
+                                                <td>{{ $pendrive->app_version }}</td>
+                                                <td>{{ $pendrive->tv_information }}</td>
+                                                <td>{{ $pendrive->version_android }}</td>
+                                                <td>{{ $pendrive->created_at }}</td>
+                                                <td>{{ $pendrive->updated }}</td>
+                                                <td>
+                                                    <a href="{{ route('pendrive.edit', $pendrive->id) }}" class="btn btn-primary">Edit</a>
+                                                    <form action="{{ route('pendrive.destroy', $pendrive->id) }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                </td>
+                            
+                                            </tr>
+                                        @endforeach
                                       </tbody>
                                   </table>
                               </div>

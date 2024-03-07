@@ -14,16 +14,16 @@
     <link rel="shortcut icon" href="assets/images/android-chrome-512x512.png">
 
     <!-- plugin css -->
-    <link href="assets/libs/jsvectormap/css/jsvectormap.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('assets/libs/jsvectormap/css/jsvectormap.min.css') }}" rel="stylesheet" type="text/css" />
 
     <!-- Layout Js -->
-    <script src="assets/js/layout.js"></script>
+    <script src="{{ URL::asset('assets/js/layout.js') }}"></script>
     <!-- Bootstrap Css -->
-    <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -90,8 +90,22 @@
 
                     <!-- start page title -->
                     <div class="page-title-box align-self-center d-none d-md-block">
+                        @php
+                        $namee = '';
 
-                        <h4 class="page-title mb-0">Dashboard</h4>
+                        if(request()->segment(1) == "dashboard") {
+                            $namee = 'Dashboard';
+                        } 
+                        if(request()->segment(1) == "chart-pendrive" || request()->segment(1) == "chart-school" || request()->segment(1) == "chart-date") {
+                            $namee = 'Chart';
+                        }
+
+                        if(request()->segment(1) == "pendrivelist" || request()->segment(1) == "create-pendrive" || request()->segment(1) == "pendrive") {
+                            $namee = 'Pendrive';
+                        }
+                    @endphp
+
+                    <h4 class="page-title mb-0">{{ $namee }}</h4>
                     </div>
                     <!-- end page title -->
                 </div>
@@ -151,13 +165,13 @@
                             </a>
                             <ul class="sub-menu" aria-expanded="true">
                                 <li>
-                                    <a href="{{ url('/chartbypendrive') }}">  <span>Pendrive</span> </a>
+                                    <a href="{{ url('/chart-pendrive') }}">  <span>Pendrive</span> </a>
                                 </li>
+                                {{-- <li>
+                                    <a href="{{ url('/chart-school') }}"> <span>School</span> </a>
+                                </li> --}}
                                 <li>
-                                    <a href="{{ url('/chartbyschool') }}"> <span>School</span> </a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('/chartbydate') }}">  <span>Other</span> </a>
+                                    <a href="{{ url('/chart-date') }}">  <span>Other</span> </a>
                                 </li>
                             </ul>
                         </li>

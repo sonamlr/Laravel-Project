@@ -14,17 +14,21 @@
                         <select class="form-select" name="id" aria-label="Default select example" name="roll" onchange="GetPendrive(this)">
 
                             <option value=" ">Select Pendrive</option>
-                        
+                            @if (isset($pendrives))
+                            @foreach ($pendrives as $id => $pendrive)
+                              <option value="{{ $id }}" @if($id == $selectedId)  selected @endif>{{ $pendrive }}</option>
+                              @endforeach
+                            @endif
                         </select>
-                        <!-- <script>
+                        <script>
                             function GetPendrive(selectElement) {
                                 var selectedOption = selectElement.options[selectElement.selectedIndex];
-                                if (selectedOption.value) {
-                                    var url = '' + selectedOption.value;
+                                if (selectedOption.value.trim() !== '') {
+                                    var url = '/chart-pendrive/' + selectedOption.value;
                                     window.location.replace(url);
                                 }
                             }
-                        </script> -->
+                        </script>
                     </div>
                 </div>
             </div>
@@ -37,9 +41,11 @@
                             <h4 class="card-title mb-4">Watch Time</h4>
                             <div id="chart"></div>
 
-                            <!-- <script>
-                                var chartData = ;
-
+                             <script> 
+                               @if(isset($querydata))
+                                    var chartData = @json($record);
+                                @endif
+                                
                                 function formatDuration(seconds = 0) {
                                     const hours = parseInt(seconds / 3600);
                                     const minutes = parseInt((seconds % 3600) / 60);
@@ -75,7 +81,7 @@
                                 // Initialize Apexchart
                                 var chart = new ApexCharts(document.getElementById('chart'), chartOptions);
                                 chart.render();
-                            </script> -->
+                            </script>
 
                             <div class="resize-triggers">
                                 <div class="expand-trigger">
@@ -92,10 +98,10 @@
                             <h4 class="card-title mb-4">Files</h4>
                             <div id="chart-data"></div>
 
-                            <!-- <script>
-                                // Parse the JSON-encoded data passed from the controller
-                                var chartData = ;
-                                console.log(chartData);
+                             <script>
+                                @if(isset($querydata))
+                                    var chartData = @json($querydata);
+                                @endif
 
                                 // Initialize ApexCharts
                                 var options = {
@@ -153,7 +159,7 @@
                                 });
                                 var chart = new ApexCharts(document.querySelector("#chart-data"), options);
                                 chart.render();
-                            </script> -->
+                            </script>
 
                             <div class="resize-triggers">
                                 <div class="expand-trigger">

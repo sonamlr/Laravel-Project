@@ -1,32 +1,36 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Pendrive;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
 {
-    public function pendriveList()
-        {
-            $pendrives = Pendrive::all();
-            return view('pendrive.pendrivelist', compact('pendrives'));
-        }
-    public function pendriveAdd()
-        {
-            return view('pendrive.pendriveadd');
-        }
-    public function storePendrive(Request $request)
-        {
-            $validatedData = $request->validate([
-                'pendrive' => 'required|string|max:255',
-                'activation' => 'required|string|max:255',
-                'validity' => 'required|string|max:255',
-                'remaining' => 'required|string|max:255',
-                'validityapp' => 'required|string|max:255',
-                'defaultpass' => 'required|string|max:255',
-                'installpname' => 'required|string|max:255',
-            ]);
-            Pendrive::create($validatedData);
-            return redirect('/pendrivelist'); 
-        }
+    //dashboard
+    public function dashboard()
+    {
+        return view('dashboard.dashboard');
+    } 
+    //add pendrive 
+    
+    public function editPendrive()
+    {
+        return view('pendrive.pendriveedit');
+    }
+   
+
+    //chart => search record by date
+    public function chartByDate()
+    {
+        return view('chart.chart');
+    }
+
+    //chart => search record by school name
+    public function chartBySchool()
+    {
+        return view('chart.schoolchart');
+    }
+
+    
+
 }

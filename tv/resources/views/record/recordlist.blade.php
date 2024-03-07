@@ -37,17 +37,19 @@
                                     <select class="form-select" name="id" aria-label="Default select example" name="roll" onchange='GetPendrive(this.value)'>
 
                                         <option value="">select option</option>
-                                        @foreach ($pendriveNames as $id => $name)
-                                            <option value="{{ $id }}">{{ $name }}</option>
-                                        @endforeach
+                                       @if (isset($pendrives))
+                                       @foreach ($pendrives as $id => $pendrive)
+                                         <option value="{{ $id }}" @if($id == $selectedId)  selected @endif>{{ $pendrive }}</option>
+                                         @endforeach
+                                       @endif
                                     </select>
                                 </div>
-                                {{-- <script>
+                                <script>
                                     function GetPendrive(a) {
-                                        var url = '<?php echo base_url('Pendrive/recordData/'); ?>' + a;
+                                        var url = '/pendriverecord/' + a;
                                         window.location.replace(url);
                                     }
-                                </script> --}}
+                                </script>
                             </div>
                             <div class="table-responsive mb-4">
                                   <table class="table table-hover table-nowrap align-middle mb-0">
@@ -70,7 +72,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       
+                                        @php
+                                            $i=1;
+                                        @endphp
+                                       @if (isset($matchingRecords))
+                                           @foreach ($matchingRecords as $record)
+                                               <tr>
+                                                <td>{{ $i++ }}</td>
+                                                <td>{{ $record->pendrive_name }}</td>
+                                                <td>{{ $record->name }}</td>
+                                                <td>{{ $record->class }}</td>
+                                                <td>{{ $record->date_of_access }}</td>
+                                                <td>{{ $record->time_of_access }}</td>
+                                                <td>{{ $record->category }}</td>
+                                                <td>{{ $record->subject }}</td>
+                                                <td>{{ $record->resource_name }}</td>
+                                                <td>{{ $record->duration_of_use }}</td>
+                                                <td>{{ $record->created_at }}</td>
+                                                <td>{{ $record->updated_at }}</td>
+                                               </tr>
+                                           @endforeach
+                                       @endif
                                     </tbody>
                                 </table>
                             </div>
